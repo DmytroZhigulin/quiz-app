@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import { 
   styled, 
   Box, 
@@ -72,50 +72,61 @@ const AddQuizWrap = styled(Box)(() => ({
   marginRight: '1%',
 }));
 
-export default function PrimarySearchAppBar() {
-  const [open, setOpen] = useState(false);
+class PrimarySearchAppBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+    this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+    this.handleDrawerClose = this.handleDrawerClose.bind(this);
+  }
 
-  const handleDrawerOpen = () => setOpen(true);
-  const handleDrawerClose = () => setOpen(false);
+  handleDrawerOpen = () => this.setState({ open: true });
+  handleDrawerClose = () => this.setState({ open: false });
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <HeadNav>
-        <Toolbar>
-          <IconButton
-            onClick={() => handleDrawerOpen(true)}
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <ToggleButton/>
-          </IconButton>
-    <Search>
-        <SearchIconWrapper>
-            <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ 'aria-label': 'search' }}
+  render() {
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <HeadNav>
+          <Toolbar>
+            <IconButton
+              onClick={() => this.handleDrawerOpen(true)}
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+            >
+              <ToggleButton />
+            </IconButton>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+            <AddQuizWrap>
+              <AddQuizButton size="big">
+                <AddIcon />
+                <Typography>
+                  Add quiz
+                </Typography>
+              </AddQuizButton>
+            </AddQuizWrap>
+          </Toolbar>
+        </HeadNav>
+        <SideMenu
+          open={this.state.open}
+          handleClose={this.handleDrawerClose}
+          onClick={this.handleDrawerOpen}
         />
-    </Search> 
-          <AddQuizWrap>
-            <AddQuizButton size="big" >
-              <AddIcon/>
-              <Typography>
-                Add quiz
-              </Typography>
-            </AddQuizButton>
-          </AddQuizWrap>  
-        </Toolbar>
-      </HeadNav>
-      <SideMenu
-        open={open} 
-        handleClose={handleDrawerClose} 
-        onClick={handleDrawerOpen}
-      />
-    </Box>
-  );
+      </Box>
+    );
+  }
 }
+
+export default PrimarySearchAppBar;

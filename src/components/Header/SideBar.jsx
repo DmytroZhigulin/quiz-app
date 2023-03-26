@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
     styled,
-    useTheme,
     Box,  
     Drawer, 
     List,  
@@ -24,44 +23,53 @@ const DrawerHeader = styled('div')(() => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft({ open, handleClose }) {
-  const theme = useTheme();
+class PersistentDrawerLeft extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <Drawer
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+  render() {
+    const { open, handleClose } = this.props;
+
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <Drawer
+          sx={{
             width: 240,
-            boxSizing: 'border-box',
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={() => handleClose()}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon sx={{ color: '#000000' }}/> : <ChevronRightIcon sx={{ color: '#000000' }}/>}
-          </IconButton>
-        </DrawerHeader>
-        <Divider sx={{ backgroundColor: '000000' }}/>
-        <List>
-          {['Home', 'Favourites'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <AddIcon sx={{ color: '#008BF0' }}/> : <FavoriteIcon sx={{ color: '#008BF0' }}/>}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ color: '#0081FF' }}/>
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-    </Box>
-  );
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: 240,
+              boxSizing: 'border-box',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={() => handleClose()}>
+              {window.direction === 'ltr' ? <ChevronLeftIcon sx={{ color: '#000000' }}/> : <ChevronRightIcon sx={{ color: '#000000' }}/>}
+            </IconButton>
+          </DrawerHeader>
+          <Divider sx={{ backgroundColor: '000000' }}/>
+          <List>
+            {['Home', 'Favourites'].map((text, index) => (
+              <ListItem key={text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <AddIcon sx={{ color: '#008BF0' }}/> : <FavoriteIcon sx={{ color: '#008BF0' }}/>}
+                  </ListItemIcon>
+                  <ListItemText primary={text} sx={{ color: '#0081FF' }}/>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      </Box>
+    );
+  }
 }
+
+export default PersistentDrawerLeft;

@@ -33,6 +33,7 @@ const ModalWindow = styled(Box)(() => ({
 class InfoModal extends Component {
   render() {
     const { course, about, baner, open, onClose } = this.props;
+    
     return (
       <div>
         <Modal

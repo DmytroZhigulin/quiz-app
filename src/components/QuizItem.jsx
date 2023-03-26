@@ -79,18 +79,11 @@ class QuizItem extends Component {
     };
   }
 
-  setInfoModalOpen = () => {
-    this.setState({ openInfo: true });
-  };
+  setInfoModalOpen = () => this.setState({ openInfo: true });
+  setQuizModalOpen = () => this.setState({ openQuiz: true });
 
-  setQuizModalOpen = () => {
-    this.setState({ openQuiz: true });
-  };
-
-  handleClose = () => {
-    this.setState({ openInfo: false, openQuiz: false });
-  };
-
+  handleClose = () => this.setState({ openInfo: false, openQuiz: false });
+  
   render() {
     const { course, descr, img, baner, about } = this.props;
 
