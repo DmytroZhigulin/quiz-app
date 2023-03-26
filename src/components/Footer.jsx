@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { 
   styled,  
   IconButton, 
@@ -38,20 +38,24 @@ const Telegram = styled(TelegramIcon)(() => ({
   borderRadius: '50%',
 }));
 
-export default function MainFooter() {
-
-  return (
-    <Foo sx={{ flexGrow: 1 }}>
-      <IconButton size="medium">
-        <Instagram/>
-      </IconButton>
-      <IconButton size="medium">
-        <Facebook/>
-      </IconButton>
-      <IconButton size="medium">
-        <Telegram/>
-      </IconButton>
-    </Foo>
-  );
+class MainFooter extends Component {
+  render() {
+    return (
+      <Foo sx={{ flexGrow: 1 }}>
+        <IconButton size="medium">
+          <Instagram/>
+        </IconButton>
+        <IconButton size="medium">
+          <Facebook/>
+        </IconButton>
+        <IconButton size="medium">
+          <Telegram/>
+        </IconButton>
+      </Foo>
+    );
+  }
 }
+
+export default MainFooter;
+
 

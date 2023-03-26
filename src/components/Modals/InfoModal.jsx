@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   Backdrop, 
   Box, 
@@ -30,41 +30,43 @@ const ModalWindow = styled(Box)(() => ({
   borderRadius: '15px',
 }));
 
-export default function InfoModal({ course, about, baner, open, onClose }) {
-
-  return (
-    <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={onClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
+class InfoModal extends Component {
+  render() {
+    const { course, about, baner, open, onClose } = this.props;
+    return (
+      <div>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={onClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
             timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <ModalWindow>
-            <InfoModalTitle id="transition-modal-title" variant="h6" component="h2">
-              What is {course} ?
-            </InfoModalTitle>
-            <CardMedia
-              component="img"
-              height="194"
-              image={baner}
-              alt={course}
-            />
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {about}
-            </Typography>
-          </ModalWindow>
-        </Fade>
-      </Modal>
-    </div>
-  );
+          }}
+        >
+          <Fade in={open}>
+            <ModalWindow>
+              <InfoModalTitle id="transition-modal-title" variant="h6" component="h2">
+                What is {course} ?
+              </InfoModalTitle>
+              <CardMedia
+                component="img"
+                height="194"
+                image={baner}
+                alt={course}
+              />
+              <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+                {about}
+              </Typography>
+            </ModalWindow>
+          </Fade>
+        </Modal>
+      </div>
+    );
+  }
 }
+
+export default InfoModal;
 
