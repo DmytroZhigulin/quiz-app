@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Backdrop,
   Box,
@@ -20,9 +20,7 @@ const ModalWindow = styled(Box)(() => ({
   borderRadius: '15px',
 }));
 
-class StartModal extends Component {
-  render() {
-    const { course, open, onClose } = this.props;
+export default function StartModal({ course, open, onClose }) {
 
     return (
       <div>
@@ -50,6 +48,3 @@ class StartModal extends Component {
       </div>
     );
   }
-}
-
-export default StartModal;

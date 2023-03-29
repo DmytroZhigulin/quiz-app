@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from 'react';
 import { 
   styled,
   Card,  
@@ -70,75 +70,76 @@ const RightIcons = styled('div')(() => ({
   display: 'block',
 }));
 
-class QuizItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openInfo: false,
-      openQuiz: false,
-    };
-  }
+export default function QuizItem({ course, id, descr, img, baner, about }) {
+  const [openInfo, setInfoModalOpen] = useState(false);
+  const [openQuiz, setQuizModalOpen] = useState(false);
 
-  setInfoModalOpen = () => this.setState({ openInfo: true });
-  setQuizModalOpen = () => this.setState({ openQuiz: true });
-
-  handleClose = () => this.setState({ openInfo: false, openQuiz: false });
-  
-  render() {
-    const { course, descr, img, baner, about } = this.props;
-
-    return (
-      <>
-        <QuizCard sx={{ maxWidth: 345 }}>
-          <QuizCardHead>
-            <QuizAvatar component="img" image={img} alt={course} />
-            <QuizCardTitle>{course} quiz</QuizCardTitle>
-          </QuizCardHead>
-          <CardMedia
+  return (
+    <>
+      <QuizCard sx={{ maxWidth: 345 }}>
+        <QuizCardHead>
+          <QuizAvatar
             component="img"
-            height="194"
-            image={baner}
+            image={img}
             alt={course}
           />
-          <CardContent>
-            <QuizCardDescr>{descr}</QuizCardDescr>
-          </CardContent>
-          <IconsWrapper disableSpacing>
-            <LeftIcons>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon sx={{ color: "#484554" }} />
-              </IconButton>
-              <IconButton aria-label="info" onClick={this.setInfoModalOpen}>
-                <InfoOutlinedIcon sx={{ color: "#FF9372" }} />
-              </IconButton>
-            </LeftIcons>
-            <RightIcons>
-              <IconButton
-                aria-label="start quiz"
-                onClick={this.setQuizModalOpen}
+          <QuizCardTitle>
+            {course} quiz
+          </QuizCardTitle>
+        </QuizCardHead>
+        <CardMedia
+          component="img"
+          height="194"
+          image={baner}
+          alt={course}
+        />
+        <CardContent>
+          <QuizCardDescr>
+            {descr}
+          </QuizCardDescr>
+        </CardContent>
+        <IconsWrapper disableSpacing>
+          <LeftIcons>
+            <IconButton 
+              aria-label="add to favorites"
+            >
+              <FavoriteIcon sx={{ color:'#484554' }}/>
+            </IconButton>
+            <IconButton 
+              aria-label="info"
+              onClick={() => setInfoModalOpen(true)}
               >
-                <PlayCircleOutlineIcon
-                  sx={{ color: "#008761", fontSize: "30px" }}
-                />
-              </IconButton>
-            </RightIcons>
-          </IconsWrapper>
-        </QuizCard>
-        <StartModal
-          open={this.state.openQuiz}
-          onClose={this.handleClose}
-          course={course}
-        />
-        <InfoModal
-          open={this.state.openInfo}
-          onClose={this.handleClose}
-          course={course}
-          about={about}
-          baner={baner}
-        />
-      </>
-    );
-  }
+                
+              <InfoOutlinedIcon sx={{ color:'#FF9372' }}/>
+            </IconButton>
+          </LeftIcons>
+          <RightIcons>
+            <IconButton 
+              aria-label="start quiz"
+              onClick={() => setQuizModalOpen(true)}
+            >
+              
+              <PlayCircleOutlineIcon sx={{ color:'#008761', fontSize: '30px' }}/>
+            </IconButton>
+          </RightIcons>
+          
+          
+          
+        </IconsWrapper>
+      </QuizCard>
+      <StartModal 
+        open={openQuiz}
+        onClose={() => setQuizModalOpen(false)}
+        course={course}
+      />
+      <InfoModal
+        open={openInfo}
+        onClose={() => setInfoModalOpen(false)}
+        course={course}
+        about={about}
+        baner={baner}
+      />
+      
+    </>
+  );
 }
-
-export default QuizItem;

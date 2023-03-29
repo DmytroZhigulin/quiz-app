@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { 
   styled, 
   Box, 
@@ -72,33 +72,25 @@ const AddQuizWrap = styled(Box)(() => ({
   marginRight: '1%',
 }));
 
-class PrimarySearchAppBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-    };
-    this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
-    this.handleDrawerClose = this.handleDrawerClose.bind(this);
-  }
+export default function PrimarySearchAppBar() {
+  const [open, setOpen] = useState(false);
 
-  handleDrawerOpen = () => this.setState({ open: true });
-  handleDrawerClose = () => this.setState({ open: false });
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
 
-  render() {
     return (
       <Box sx={{ flexGrow: 1 }}>
         <HeadNav>
           <Toolbar>
             <IconButton
-              onClick={() => this.handleDrawerOpen(true)}
+            onClick={() => handleDrawerOpen(true)}
               size="large"
               edge="start"
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
             >
-              <ToggleButton />
+            <ToggleButton/>
             </IconButton>
             <Search>
               <SearchIconWrapper>
@@ -110,8 +102,8 @@ class PrimarySearchAppBar extends Component {
               />
             </Search>
             <AddQuizWrap>
-              <AddQuizButton size="big">
-                <AddIcon />
+            <AddQuizButton size="big" >
+              <AddIcon/>
                 <Typography>
                   Add quiz
                 </Typography>
@@ -120,13 +112,10 @@ class PrimarySearchAppBar extends Component {
           </Toolbar>
         </HeadNav>
         <SideMenu
-          open={this.state.open}
-          handleClose={this.handleDrawerClose}
-          onClick={this.handleDrawerOpen}
+        open={open} 
+        handleClose={handleDrawerClose} 
+        onClick={handleDrawerOpen}
         />
       </Box>
     );
   }
-}
-
-export default PrimarySearchAppBar;

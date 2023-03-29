@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
     styled,
+    useTheme,
     Box,  
     Drawer, 
     List,  
@@ -23,14 +24,8 @@ const DrawerHeader = styled('div')(() => ({
   justifyContent: 'flex-end',
 }));
 
-class PersistentDrawerLeft extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const { open, handleClose } = this.props;
+export default function PersistentDrawerLeft({ open, handleClose }) {
+  const theme = useTheme();
 
     return (
       <Box sx={{ display: 'flex' }}>
@@ -50,7 +45,7 @@ class PersistentDrawerLeft extends Component {
         >
           <DrawerHeader>
             <IconButton onClick={() => handleClose()}>
-              {window.direction === 'ltr' ? <ChevronLeftIcon sx={{ color: '#000000' }}/> : <ChevronRightIcon sx={{ color: '#000000' }}/>}
+            {theme.direction === 'ltr' ? <ChevronLeftIcon sx={{ color: '#000000' }}/> : <ChevronRightIcon sx={{ color: '#000000' }}/>}
             </IconButton>
           </DrawerHeader>
           <Divider sx={{ backgroundColor: '000000' }}/>
@@ -70,6 +65,3 @@ class PersistentDrawerLeft extends Component {
       </Box>
     );
   }
-}
-
-export default PersistentDrawerLeft;

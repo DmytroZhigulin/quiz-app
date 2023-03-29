@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
   styled,  
   IconButton, 
@@ -38,8 +38,8 @@ const Telegram = styled(TelegramIcon)(() => ({
   borderRadius: '50%',
 }));
 
-class MainFooter extends Component {
-  render() {
+export default function MainFooter() {
+
     return (
       <Foo sx={{ flexGrow: 1 }}>
         <IconButton size="medium">
@@ -54,8 +54,4 @@ class MainFooter extends Component {
       </Foo>
     );
   }
-}
-
-export default MainFooter;
-
 
