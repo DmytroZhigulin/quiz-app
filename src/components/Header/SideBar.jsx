@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
     styled,
     useTheme,
@@ -14,7 +15,7 @@ import {
 } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import AddIcon from '@mui/icons-material/Add';
+import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 //icons-material не импортятся скопом, выдает ошибку!!!
 
@@ -26,6 +27,11 @@ const DrawerHeader = styled('div')(() => ({
 
 export default function PersistentDrawerLeft({ open, handleClose }) {
   const theme = useTheme();
+
+  const pages = ['Головна', 'Обране'];
+  const icons = [<HomeIcon />, <FavoriteIcon />];
+  const links = ['/', '/favorite'];
+  
 
     return (
       <Box sx={{ display: 'flex' }}>
@@ -50,15 +56,17 @@ export default function PersistentDrawerLeft({ open, handleClose }) {
           </DrawerHeader>
           <Divider sx={{ backgroundColor: '000000' }}/>
           <List>
-            {['Home', 'Favourites'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <AddIcon sx={{ color: '#008BF0' }}/> : <FavoriteIcon sx={{ color: '#008BF0' }}/>}
-                  </ListItemIcon>
-                  <ListItemText primary={text} sx={{ color: '#0081FF' }}/>
-                </ListItemButton>
-              </ListItem>
+            {pages.map((page, index) => (
+              <Link key={page} to={links[index]}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon sx={{ color: 'white' }}>
+                      {icons[index]}
+                    </ListItemIcon>
+                    <ListItemText primary={page} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
             ))}
           </List>
         </Drawer>

@@ -75,7 +75,7 @@ export default function UsersList() {
                     <SearchIcon />
                     </SearchIconWrapper>
                     <StyledInputBase
-                    placeholder="Search…"
+                    placeholder="Пошук…"
                     inputProps={{ 'aria-label': 'search' }}
                     onChange={(e) => handleSearch(e.target.value)}
                     />

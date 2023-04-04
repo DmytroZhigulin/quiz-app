@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddIcon from '@mui/icons-material/Add';
-import SideMenu from './SideBar';
+import SideBar from './SideBar';
 
 const HeadNav = styled(Box)(() => ({
   position: 'fixed',
@@ -43,41 +43,41 @@ const AddQuizWrap = styled(Box)(() => ({
   marginRight: '1%',
 }));
 
-export default function PrimarySearchAppBar() {
+export default function NavBar() {
   const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => setOpen(true);
   const handleDrawerClose = () => setOpen(false);
 
   return (
-        <Box sx={{ flexGrow: 1 }}>
-          <HeadNav>
-            <Toolbar>
-              <IconButton
-              onClick={() => handleDrawerOpen(true)}
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                sx={{ mr: 2 }}
-              >
-              <ToggleButton/>
-              </IconButton>
-              <AddQuizWrap>
-              <AddQuizButton size="big" >
-                <AddIcon/>
-                  <Typography>
-                    Add quiz
-                  </Typography>
-                </AddQuizButton>
-              </AddQuizWrap>
-            </Toolbar>
-          </HeadNav>
-          <SideMenu
-          open={open} 
-          handleClose={handleDrawerClose} 
-          onClick={handleDrawerOpen}
-          />
-        </Box>
-    );
-  }
+    <Box sx={{ flexGrow: 1 }}>
+      <HeadNav>
+        <Toolbar>
+          <IconButton
+          onClick={() => handleDrawerOpen(true)}
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+          >
+          <ToggleButton/>
+          </IconButton>
+          <AddQuizWrap>
+          <AddQuizButton size="big" >
+            <AddIcon/>
+              <Typography>
+                Додати квіз
+              </Typography>
+            </AddQuizButton>
+          </AddQuizWrap>
+        </Toolbar>
+      </HeadNav>
+      <SideBar
+        open={open} 
+        handleClose={handleDrawerClose} 
+        onClick={handleDrawerOpen}
+      />
+    </Box>
+  );
+}
